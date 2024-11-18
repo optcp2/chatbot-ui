@@ -78,7 +78,7 @@ export default async function Login({
       )
     }
 
-    return redirect(`/${homeWorkspace.id}/chat`)
+    return redirect(`/${homeWorkspace.id}/chat?refresh=true`)
   }
 
   const getEnvVarOrEdgeConfigValue = async (name: string) => {
@@ -136,7 +136,7 @@ export default async function Login({
       return redirect(`/login?message=${error.message}`)
     }
 
-    return redirect("/setup")
+    return redirect("/login?message=Check email to continue sign in process")
 
     // USE IF YOU WANT TO SEND EMAIL VERIFICATION, ALSO CHANGE TOML FILE
     // return redirect("/login?message=Check email to continue sign in process")

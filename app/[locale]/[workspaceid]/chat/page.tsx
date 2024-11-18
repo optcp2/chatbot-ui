@@ -10,13 +10,27 @@ import { Brand } from "@/components/ui/brand"
 import { ChatbotUIContext } from "@/context/context"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { useTheme } from "next-themes"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 export default function ChatPage() {
   useHotkey("o", () => handleNewChat())
   useHotkey("l", () => {
     handleFocusChatInput()
   })
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const refresh = urlParams.get("refresh")
+
+    if (refresh === "true") {
+      urlParams.delete("refresh")
+      let paramsStr = urlParams.toString()
+      if (paramsStr) {
+        paramsStr = "?" + paramsStr
+      }
+      window.location.href = window.location.pathname + paramsStr
+    }
+  }, [])
 
   const { chatMessages } = useContext(ChatbotUIContext)
 
