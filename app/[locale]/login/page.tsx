@@ -126,6 +126,7 @@ export default async function Login({
       email,
       password,
       options: {
+        emailRedirectTo: process.env.SIGNUP_REDIRECT_URL ?? "https://optmyzr-chatbot.vercel.app/setup"
         // USE IF YOU WANT TO SEND EMAIL VERIFICATION, ALSO CHANGE TOML FILE
         // emailRedirectTo: `${origin}/auth/callback`
       }
