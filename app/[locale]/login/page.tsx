@@ -45,6 +45,16 @@ export default async function Login({
       throw new Error(error.message)
     }
 
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", session.user.id)
+      .single()
+
+    if(!profile?.display_name) {
+      return redirect(`/setup`)
+    }
+
     return redirect(`/${homeWorkspace.id}/chat`)
   }
 
@@ -78,7 +88,17 @@ export default async function Login({
       )
     }
 
-    return redirect(`/${homeWorkspace.id}/chat?refresh=true`)
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", data.user.id)
+      .single()
+
+    if(!profile?.display_name) {
+      return redirect(`/setup`)
+    }
+
+    return redirect(`/${homeWorkspace.id}/chat`)
   }
 
   const getEnvVarOrEdgeConfigValue = async (name: string) => {

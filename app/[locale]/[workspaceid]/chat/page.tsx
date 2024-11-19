@@ -18,20 +18,6 @@ export default function ChatPage() {
     handleFocusChatInput()
   })
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const refresh = urlParams.get("refresh")
-
-    if (refresh === "true") {
-      urlParams.delete("refresh")
-      let paramsStr = urlParams.toString()
-      if (paramsStr) {
-        paramsStr = "?" + paramsStr
-      }
-      window.location.href = window.location.pathname + paramsStr
-    }
-  }, [])
-
   const { chatMessages } = useContext(ChatbotUIContext)
 
   const { handleNewChat, handleFocusChatInput } = useChatHandler()

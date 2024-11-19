@@ -152,7 +152,7 @@ export default function SetupPage() {
     setSelectedWorkspace(homeWorkspace!)
     setWorkspaces(workspaces)
 
-    return router.push(`/${homeWorkspace?.id}/chat?refresh=true`)
+    window.location.href = `/${homeWorkspace?.id}/chat`;
   }
 
   const renderStep = (stepNum: number) => {
